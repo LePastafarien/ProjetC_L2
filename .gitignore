@@ -1,8 +1,12 @@
 /cmake-build-debug
 /html
 /latex
-*.txt
-config
 /.idea
+
+config
 *.dox
+
 main.c
+*.txt
+
+.gitignore
