@@ -1,0 +1,42 @@
+\hypertarget{dicoParser_8h_source}{}\doxysection{dico\+Parser.\+h}
+\mbox{\hyperlink{dicoParser_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#ifndef PROJETC\_2022\_DICOPARSER\_H}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#define PROJETC\_2022\_DICOPARSER\_H}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{21 \textcolor{keyword}{struct }\mbox{\hyperlink{structs__t}{s\_t}}\{}
+\DoxyCodeLine{22     \textcolor{keywordtype}{char}** tab;}
+\DoxyCodeLine{23     \textcolor{keywordtype}{int} size;}
+\DoxyCodeLine{24     \textcolor{keywordtype}{int} maxSize;}
+\DoxyCodeLine{25 \};}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{31 \textcolor{keyword}{typedef} \textcolor{keyword}{struct }\mbox{\hyperlink{structs__t}{s\_t}} \mbox{\hyperlink{structs__t}{sizedTab}};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{37 \textcolor{keyword}{typedef} \textcolor{keywordtype}{char}* \mbox{\hyperlink{dicoParser_8h_ade5564eae6cc31b285dd98c1f926c8f2}{string}};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#define MIN(a,b) (strlen(a) < strlen(b) ? a : b)}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{53 \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{dicoParser_8h_a1e76280d298faaef000cf1052eea95e3}{getCount}}(FILE*, \textcolor{keywordtype}{char}, \textcolor{keywordtype}{char});}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{59 \textcolor{preprocessor}{\#define getLineCount(f) getCount(f, EOF, '\(\backslash\)n')}}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{65 \textcolor{preprocessor}{\#define getColumnCount(f) getCount(f, '\(\backslash\)n', '\(\backslash\)t')}}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{76 \mbox{\hyperlink{structs__t}{sizedTab}} \mbox{\hyperlink{dicoParser_8h_a5c7f3bd18cd646bff0efa020657ad338}{getColumnTab}}(FILE*, \textcolor{keywordtype}{int}, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{86 \mbox{\hyperlink{structs__t}{sizedTab}} \mbox{\hyperlink{dicoParser_8h_a8d674f82700cce2b131a8e15325e961c}{getLineTab}}(FILE*, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{97 \textcolor{keywordtype}{int} inCharTab(\textcolor{keywordtype}{string}, \textcolor{keywordtype}{string}*, \textcolor{keywordtype}{int});}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{107 \textcolor{keywordtype}{int} \mbox{\hyperlink{dicoParser_8h_a6f6bdd7ef1ff5dbfd01e743da2f3d0f1}{strGreater}}(\textcolor{keyword}{const} \textcolor{keywordtype}{void}*, \textcolor{keyword}{const} \textcolor{keywordtype}{void}*);}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//PROJETC\_2022\_DICOPARSER\_H}}
+
+\end{DoxyCode}

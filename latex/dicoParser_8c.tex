@@ -1,0 +1,117 @@
+\hypertarget{dicoParser_8c}{}\doxysection{dico\+Parser.\+c File Reference}
+\label{dicoParser_8c}\index{dicoParser.c@{dicoParser.c}}
+{\ttfamily \#include \char`\"{}dico\+Parser.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \mbox{\hyperlink{dicoParser_8c_a498fc726ee6c48c271050757352979e8}{get\+Count}} (FILE $\ast$f, char delimiter, char val\+To\+Count)
+\begin{DoxyCompactList}\small\item\em counts appearances of {\itshape valto\+Count} in the {\itshape f} file, until it meats {\itshape delimiter} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{dicoParser_8h_a72e7b26e2889d75f9d3a05a6dd5d587c}{sized\+Tab}} \mbox{\hyperlink{dicoParser_8c_a9368264c7f9906fdcd97b2fedf642906}{get\+Column\+Tab}} (FILE $\ast$f, int column, int no\+Dupes)
+\begin{DoxyCompactList}\small\item\em gives the tabs of all the elements in a column \end{DoxyCompactList}\item 
+\mbox{\hyperlink{dicoParser_8h_a72e7b26e2889d75f9d3a05a6dd5d587c}{sized\+Tab}} \mbox{\hyperlink{dicoParser_8c_aa2ce134c5d1c5478e123ef103b69cd54}{get\+Line\+Tab}} (FILE $\ast$f, int line)
+\begin{DoxyCompactList}\small\item\em gives the tabs of all the elements in a line \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{dicoParser_8c_a0343bca66a338bed838b0e9e66f8f6ba}{in\+Char\+Tab}} (char $\ast$val, \mbox{\hyperlink{dicoParser_8h_a72e7b26e2889d75f9d3a05a6dd5d587c}{sized\+Tab}} tab)
+\begin{DoxyCompactList}\small\item\em checks if a string is in a string array \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{dicoParser_8c_a9368264c7f9906fdcd97b2fedf642906}\label{dicoParser_8c_a9368264c7f9906fdcd97b2fedf642906}} 
+\index{dicoParser.c@{dicoParser.c}!getColumnTab@{getColumnTab}}
+\index{getColumnTab@{getColumnTab}!dicoParser.c@{dicoParser.c}}
+\doxysubsubsection{\texorpdfstring{getColumnTab()}{getColumnTab()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{dicoParser_8h_a72e7b26e2889d75f9d3a05a6dd5d587c}{sized\+Tab}} get\+Column\+Tab (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{f,  }\item[{int}]{column,  }\item[{int}]{no\+Dupes }\end{DoxyParamCaption})}
+
+
+
+gives the tabs of all the elements in a column 
+
+\begin{DoxyWarning}{Warning}
+throws an error if 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{dicoParser_8h_a415ae29837abaf6932daf3396017ea5f}{getColumnCount}}(f) > column}
+
+\end{DoxyCode}
+ 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em f} & the file to search in \\
+\hline
+{\em column} & the index of the column \\
+\hline
+{\em no\+Dupes} & whether or not there should duplicates in the tab \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a tab of all the strings in the column 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dicoParser_8c_a498fc726ee6c48c271050757352979e8}\label{dicoParser_8c_a498fc726ee6c48c271050757352979e8}} 
+\index{dicoParser.c@{dicoParser.c}!getCount@{getCount}}
+\index{getCount@{getCount}!dicoParser.c@{dicoParser.c}}
+\doxysubsubsection{\texorpdfstring{getCount()}{getCount()}}
+{\footnotesize\ttfamily unsigned int get\+Count (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{f,  }\item[{char}]{delimiter,  }\item[{char}]{val\+To\+Count }\end{DoxyParamCaption})}
+
+
+
+counts appearances of {\itshape valto\+Count} in the {\itshape f} file, until it meats {\itshape delimiter} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & the file to search in \\
+\hline
+{\em delimiter} & the char at witch the function should stop \\
+\hline
+{\em val\+To\+Count} & the char we are trying to match \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of occurrences of {\itshape val\+Count} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dicoParser_8c_aa2ce134c5d1c5478e123ef103b69cd54}\label{dicoParser_8c_aa2ce134c5d1c5478e123ef103b69cd54}} 
+\index{dicoParser.c@{dicoParser.c}!getLineTab@{getLineTab}}
+\index{getLineTab@{getLineTab}!dicoParser.c@{dicoParser.c}}
+\doxysubsubsection{\texorpdfstring{getLineTab()}{getLineTab()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{dicoParser_8h_a72e7b26e2889d75f9d3a05a6dd5d587c}{sized\+Tab}} get\+Line\+Tab (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{f,  }\item[{int}]{line }\end{DoxyParamCaption})}
+
+
+
+gives the tabs of all the elements in a line 
+
+\begin{DoxyWarning}{Warning}
+throws an error if 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{dicoParser_8h_af5d48fbad4d9dcbcf9d927a425dcbeef}{getLineCount}}(f) < line}
+
+\end{DoxyCode}
+ 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em f} & the file to search in \\
+\hline
+{\em line} & the index of the line \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a tab of all the strings in the line 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dicoParser_8c_a0343bca66a338bed838b0e9e66f8f6ba}\label{dicoParser_8c_a0343bca66a338bed838b0e9e66f8f6ba}} 
+\index{dicoParser.c@{dicoParser.c}!inCharTab@{inCharTab}}
+\index{inCharTab@{inCharTab}!dicoParser.c@{dicoParser.c}}
+\doxysubsubsection{\texorpdfstring{inCharTab()}{inCharTab()}}
+{\footnotesize\ttfamily int in\+Char\+Tab (\begin{DoxyParamCaption}\item[{char $\ast$}]{val,  }\item[{\mbox{\hyperlink{dicoParser_8h_a72e7b26e2889d75f9d3a05a6dd5d587c}{sized\+Tab}}}]{tab }\end{DoxyParamCaption})}
+
+
+
+checks if a string is in a string array 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & the value to find \\
+\hline
+{\em tab} & the tab in which to search \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a boolean representing if a string is in the given array 
+\end{DoxyReturn}

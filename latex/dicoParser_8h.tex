@@ -1,0 +1,170 @@
+\hypertarget{dicoParser_8h}{}\doxysection{dico\+Parser.\+h File Reference}
+\label{dicoParser_8h}\index{dicoParser.h@{dicoParser.h}}
+
+
+tsv .txt dictionary parser  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structs__t}{s\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em a simple sized string array \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{dicoParser_8h_a3acffbd305ee72dcd4593c0d8af64a4f}\label{dicoParser_8h_a3acffbd305ee72dcd4593c0d8af64a4f}} 
+\#define {\bfseries MIN}(a,  b)~(strlen(a) $<$ strlen(b) ? a \+: b)
+\begin{DoxyCompactList}\small\item\em gives the smallest (in length) string of the two \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{dicoParser_8h_af5d48fbad4d9dcbcf9d927a425dcbeef}\label{dicoParser_8h_af5d48fbad4d9dcbcf9d927a425dcbeef}} 
+\#define {\bfseries get\+Line\+Count}(f)~\mbox{\hyperlink{dicoParser_8h_a1e76280d298faaef000cf1052eea95e3}{get\+Count}}(f, EOF, \textquotesingle{}\textbackslash{}n\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em counts appearances of lines in the specified file \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{dicoParser_8h_a415ae29837abaf6932daf3396017ea5f}\label{dicoParser_8h_a415ae29837abaf6932daf3396017ea5f}} 
+\#define {\bfseries get\+Column\+Count}(f)~\mbox{\hyperlink{dicoParser_8h_a1e76280d298faaef000cf1052eea95e3}{get\+Count}}(f, \textquotesingle{}\textbackslash{}n\textquotesingle{}, \textquotesingle{}\textbackslash{}t\textquotesingle{})
+\begin{DoxyCompactList}\small\item\em counts appearances of columns in the specified file \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{dicoParser_8h_a72e7b26e2889d75f9d3a05a6dd5d587c}\label{dicoParser_8h_a72e7b26e2889d75f9d3a05a6dd5d587c}} 
+typedef struct \mbox{\hyperlink{structs__t}{s\+\_\+t}} {\bfseries sized\+Tab}
+\begin{DoxyCompactList}\small\item\em declaration of sized tab \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{dicoParser_8h_ade5564eae6cc31b285dd98c1f926c8f2}\label{dicoParser_8h_ade5564eae6cc31b285dd98c1f926c8f2}} 
+typedef char $\ast$ {\bfseries string}
+\begin{DoxyCompactList}\small\item\em replaces char$\ast$ by string for convenience \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \mbox{\hyperlink{dicoParser_8h_a1e76280d298faaef000cf1052eea95e3}{get\+Count}} (FILE $\ast$, char, char)
+\begin{DoxyCompactList}\small\item\em counts occurrences of {\itshape valto\+Count} in the {\itshape f} file, until it meats {\itshape delimiter} \end{DoxyCompactList}\item 
+\mbox{\hyperlink{dicoParser_8h_a72e7b26e2889d75f9d3a05a6dd5d587c}{sized\+Tab}} \mbox{\hyperlink{dicoParser_8h_a5c7f3bd18cd646bff0efa020657ad338}{get\+Column\+Tab}} (FILE $\ast$, int, int)
+\begin{DoxyCompactList}\small\item\em gives the tabs of all the elements in a column \end{DoxyCompactList}\item 
+\mbox{\hyperlink{dicoParser_8h_a72e7b26e2889d75f9d3a05a6dd5d587c}{sized\+Tab}} \mbox{\hyperlink{dicoParser_8h_a8d674f82700cce2b131a8e15325e961c}{get\+Line\+Tab}} (FILE $\ast$, int)
+\begin{DoxyCompactList}\small\item\em gives the tabs of all the elements in a line \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{dicoParser_8h_a4fd2907981932b990bbfe02f4bb52ac9}\label{dicoParser_8h_a4fd2907981932b990bbfe02f4bb52ac9}} 
+int {\bfseries in\+Char\+Tab} (\mbox{\hyperlink{dicoParser_8h_ade5564eae6cc31b285dd98c1f926c8f2}{string}}, \mbox{\hyperlink{dicoParser_8h_ade5564eae6cc31b285dd98c1f926c8f2}{string}} $\ast$, int)
+\item 
+int \mbox{\hyperlink{dicoParser_8h_a6f6bdd7ef1ff5dbfd01e743da2f3d0f1}{str\+Greater}} (const void $\ast$, const void $\ast$)
+\begin{DoxyCompactList}\small\item\em basically the {\itshape compare} function for {\itshape qsort} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+tsv .txt dictionary parser 
+
+\begin{DoxyAuthor}{Authors}
+Antoine Ribot 
+
+Jacques Soghomonyan 
+
+Nicolas Chalumeau 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{dicoParser_8h_a5c7f3bd18cd646bff0efa020657ad338}\label{dicoParser_8h_a5c7f3bd18cd646bff0efa020657ad338}} 
+\index{dicoParser.h@{dicoParser.h}!getColumnTab@{getColumnTab}}
+\index{getColumnTab@{getColumnTab}!dicoParser.h@{dicoParser.h}}
+\doxysubsubsection{\texorpdfstring{getColumnTab()}{getColumnTab()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{dicoParser_8h_a72e7b26e2889d75f9d3a05a6dd5d587c}{sized\+Tab}} get\+Column\+Tab (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{f,  }\item[{int}]{column,  }\item[{int}]{no\+Dupes }\end{DoxyParamCaption})}
+
+
+
+gives the tabs of all the elements in a column 
+
+\begin{DoxyWarning}{Warning}
+throws an error if 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{dicoParser_8h_a415ae29837abaf6932daf3396017ea5f}{getColumnCount}}(f) > column}
+
+\end{DoxyCode}
+ 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em f} & the file to search in \\
+\hline
+{\em column} & the index of the column \\
+\hline
+{\em no\+Dupes} & whether or not there should duplicates in the tab \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a tab of all the strings in the column 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dicoParser_8h_a1e76280d298faaef000cf1052eea95e3}\label{dicoParser_8h_a1e76280d298faaef000cf1052eea95e3}} 
+\index{dicoParser.h@{dicoParser.h}!getCount@{getCount}}
+\index{getCount@{getCount}!dicoParser.h@{dicoParser.h}}
+\doxysubsubsection{\texorpdfstring{getCount()}{getCount()}}
+{\footnotesize\ttfamily unsigned int get\+Count (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{f,  }\item[{char}]{delimiter,  }\item[{char}]{val\+To\+Count }\end{DoxyParamCaption})}
+
+
+
+counts occurrences of {\itshape valto\+Count} in the {\itshape f} file, until it meats {\itshape delimiter} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & the file to search in \\
+\hline
+{\em delimiter} & the char at witch the function should stop \\
+\hline
+{\em val\+To\+Count} & the char we are trying to match \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of occurrences of {\itshape val\+Count} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dicoParser_8h_a8d674f82700cce2b131a8e15325e961c}\label{dicoParser_8h_a8d674f82700cce2b131a8e15325e961c}} 
+\index{dicoParser.h@{dicoParser.h}!getLineTab@{getLineTab}}
+\index{getLineTab@{getLineTab}!dicoParser.h@{dicoParser.h}}
+\doxysubsubsection{\texorpdfstring{getLineTab()}{getLineTab()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{dicoParser_8h_a72e7b26e2889d75f9d3a05a6dd5d587c}{sized\+Tab}} get\+Line\+Tab (\begin{DoxyParamCaption}\item[{FILE $\ast$}]{f,  }\item[{int}]{line }\end{DoxyParamCaption})}
+
+
+
+gives the tabs of all the elements in a line 
+
+\begin{DoxyWarning}{Warning}
+throws an error if 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{dicoParser_8h_af5d48fbad4d9dcbcf9d927a425dcbeef}{getLineCount}}(f) < line}
+
+\end{DoxyCode}
+ 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em f} & the file to search in \\
+\hline
+{\em line} & the index of the line \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a tab of all the strings in the line 
+\end{DoxyReturn}
+\mbox{\Hypertarget{dicoParser_8h_a6f6bdd7ef1ff5dbfd01e743da2f3d0f1}\label{dicoParser_8h_a6f6bdd7ef1ff5dbfd01e743da2f3d0f1}} 
+\index{dicoParser.h@{dicoParser.h}!strGreater@{strGreater}}
+\index{strGreater@{strGreater}!dicoParser.h@{dicoParser.h}}
+\doxysubsubsection{\texorpdfstring{strGreater()}{strGreater()}}
+{\footnotesize\ttfamily int str\+Greater (\begin{DoxyParamCaption}\item[{const void $\ast$}]{\+\_\+str1,  }\item[{const void $\ast$}]{\+\_\+str2 }\end{DoxyParamCaption})}
+
+
+
+basically the {\itshape compare} function for {\itshape qsort} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+str1} & a pointer to a string \\
+\hline
+{\em \+\_\+str2} & the same as {\itshape \+\_\+str1} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+{\itshape 1} if {\itshape str1} \texorpdfstring{$>$}{>} {\itshape str2} ~\newline
+ {\itshape 0} if {\itshape str1} = {\itshape str2} ~\newline
+ {\itshape -\/1} otherwise 
+\end{DoxyNote}
+\begin{DoxyReturn}{Returns}
+the lexicographic order of {\itshape str1} and {\itshape str2} 
+\end{DoxyReturn}
