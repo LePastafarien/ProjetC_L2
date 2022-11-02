@@ -90,7 +90,7 @@ sizedTab getLineTab(FILE*, int);
  * \brief checks if a string is in a string array
  * \note binary search based algorithm (O(log(n))
  * \param val the value to find
- * \param tab the tab in which to search
+ * \param tab the \b sorted tab in which to search
  * \warning \b tab needs to be sorted
  * \returns a boolean representing if a string is in the given array
  */
