@@ -1,0 +1,24 @@
+var NAVTREEINDEX0 =
+{
+"annotated.html":[0,0],
+"classes.html":[0,1],
+"dicoParser_8h.html":[1,0,0],
+"dicoParser_8h.html#a1e76280d298faaef000cf1052eea95e3":[1,0,0,7],
+"dicoParser_8h.html#a3acffbd305ee72dcd4593c0d8af64a4f":[1,0,0,3],
+"dicoParser_8h.html#a415ae29837abaf6932daf3396017ea5f":[1,0,0,1],
+"dicoParser_8h.html#a5c7f3bd18cd646bff0efa020657ad338":[1,0,0,6],
+"dicoParser_8h.html#a6f6bdd7ef1ff5dbfd01e743da2f3d0f1":[1,0,0,9],
+"dicoParser_8h.html#a72e7b26e2889d75f9d3a05a6dd5d587c":[1,0,0,4],
+"dicoParser_8h.html#a8d674f82700cce2b131a8e15325e961c":[1,0,0,8],
+"dicoParser_8h.html#ade5564eae6cc31b285dd98c1f926c8f2":[1,0,0,5],
+"dicoParser_8h.html#af5d48fbad4d9dcbcf9d927a425dcbeef":[1,0,0,2],
+"dicoParser_8h_source.html":[1,0,0],
+"files.html":[1,0],
+"globals.html":[1,1,0],
+"globals_defs.html":[1,1,3],
+"globals_func.html":[1,1,1],
+"globals_type.html":[1,1,2],
+"index.html":[],
+"pages.html":[],
+"structs__t.html":[0,0,0]
+};
