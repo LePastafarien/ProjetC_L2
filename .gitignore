@@ -1,0 +1,8 @@
+/cmake-build-debug
+/html
+/latex
+*.txt
+config
+/.idea
+*.dox
+main.c
