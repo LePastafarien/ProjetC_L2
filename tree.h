@@ -17,7 +17,7 @@ typedef struct node_s{ //Création de la structure pour créer un noeud
     char letter;
     struct node_s* right, *left;
     int EOW; // End Of Word
-    char** flexedWords;
+    flexed flexedWords;
 } node;
 
 typedef struct{ //Création de la structure pour créer l'arbre

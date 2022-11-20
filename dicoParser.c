@@ -171,7 +171,10 @@ flexed getFlexedWords(FILE* f, string baseWord){
     rewind(f);
 
     flexed fl;
-    fl.tab = malloc(sizeof(char **));
+    fl.tab = malloc(60 * sizeof(char **));
+    for (int i = 0; i < 60 ;++i)
+        fl.tab[i] = malloc(sizeof(char*));
+
     fl.size = 0;
     int bufferSize = 255;
     char* buff = malloc(bufferSize * sizeof(char));
@@ -186,26 +189,26 @@ flexed getFlexedWords(FILE* f, string baseWord){
 
     for (int i = 0; i < line; ++i){
         fgets(buff, bufferSize, f);
-        //printf("%s %d\n", buff, buff[0] > baseWord[0]);
-        if(strstr(buff, baseWord)){
-            //printf("dfsfsdfs\n");
+        //printf("%s %d\n", buff, strstr(buff, baseWord) != NULL);
+        if(strstr(buff, baseWord) != NULL){
             temp = strndup(buff, strlen(buff) - 1);
 
             for (int j = 0; j < nbCol; ++j)
                 tab[j] = strdup(strsep(&temp, "\t"));
 
-            if(tab[1][0] > baseWord[0])
-                break;
+            if(tab[1][0] > baseWord[0]) break;
 
-            fl.tab[fl.size] = tab;
-            fl.size++;
-            fl.tab = realloc(fl.tab, fl.size * sizeof(char**));
+            if(!strcmp(tab[1], baseWord)){
+                for (int j = 0; j < 3; ++j)
+                    fl.tab[fl.size][j] = strdup(tab[j]);
+                fl.size++;
+            }
         }
     }
 
     free(buff);
     //free(temp);
-
+    printf("%s\n", baseWord);
     rewind(f);
     return fl;
 }

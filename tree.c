@@ -5,7 +5,8 @@ node* createNode(char val){ //Fonction qui remplie un noeuds avec une valeur
     n->right = NULL;
     n->left = NULL;
     n->EOW = 0;
-    n->flexedWords = NULL;
+    flexed f;
+    n->flexedWords = f;
     return n;
 }
 
@@ -84,5 +85,6 @@ void fillTreeDictionary(tree* dicoTree, FILE* f){
             tempNode = addLetterLeft(tempNode, word[j]);
 
         tempNode->EOW = 1;
+        tempNode->flexedWords = getFlexedWords(f, word);
     }
 }
