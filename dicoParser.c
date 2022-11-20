@@ -24,7 +24,7 @@ unsigned int getCount(FILE* f, char delimiter, char valToCount){
     return count;
 }
 
-sizedTab getColumnTab(FILE* f, int column, int noDupes){
+sizedTab getColumnTab(FILE* f, int column, int noDupes, int mode){
     if(column <= 0 || getColumnCount(f) < column)
         err(EXIT_FAILURE, "Index out of range, trying to access non existing column\n");
 
@@ -39,7 +39,7 @@ sizedTab getColumnTab(FILE* f, int column, int noDupes){
     t.tab = malloc(nbLine * sizeof(char*));
     t.maxSize = (int) nbLine;
 
-    char *temp, *string;
+    char *temp, *temp2 = NULL, *string;
 
     int idx = 0;
 
@@ -55,9 +55,34 @@ sizedTab getColumnTab(FILE* f, int column, int noDupes){
 
         t.size = idx;
 
-        t.tab[idx++] = strdup(temp);
+        int shouldBeStored = 0;
+        for (int j = 0; j < 3 - column; ++j)
+            temp2 = strsep(&string, "\t");
+        if(temp2 == NULL) temp2 = strdup(temp);
+
+        if(mode == 0)
+            shouldBeStored = 1;
+        else if (mode == 1){
+            if(temp2[0] == 'V' && temp2[1] == 'e' && temp2[2] == 'r')
+                shouldBeStored = 1;
+        }
+        else if (mode == 2) {
+            if (temp2[0] == 'A' && temp2[1] == 'd' && temp2[2] == 'j')
+                shouldBeStored = 1;
+        }
+        else if (mode == 3) {
+            if (temp2[0] == 'N' && temp2[1] == 'o' && temp2[2] == 'm')
+                shouldBeStored = 1;
+        }
+        else if (mode == 4) {
+            if (temp2[0] == 'A' && temp2[1] == 'd' && temp2[2] == 'v')
+                shouldBeStored = 1;
+        }
+
+//        printf("%c%c%c   %s  %d - %d\n", temp2[0], temp2[1], temp2[2], temp, shouldBeStored, mode);
+        if(shouldBeStored) t.tab[idx++] = strdup(temp);
     }
-    free(buff);
+    //free(buff);
 
     if(noDupes){
         int size = 0;
@@ -128,7 +153,8 @@ int strGreater(const void* _str1, const void* _str2){
     string str1 = *(string *) _str1;
     string str2 = *(string *) _str2;
 
-    if(!strcmp(str1, str2))
+    //printf("%s, %s\n", str1, str2);
+    if(strcmp(str1, str2) == 0)
         return 0;
 
     for (int i = 0; i < strlen(MIN(str1, str2)); ++i){
@@ -141,9 +167,24 @@ int strGreater(const void* _str1, const void* _str2){
     return !strcmp(str1, MIN(str1, str2)) ? -1 : 1;
 }
 
-int inCharTab(string val, string* tab, int size){
-    if(size <= 0)
+int strGreater2(string str1, string str2){
+    //printf("%s, %s\n", str1, str2);
+    if(strcmp(str1, str2) == 0)
         return 0;
+
+    for (int i = 0; i < strlen(MIN(str1, str2)); ++i){
+        if(str1[i] > str2[i])
+            return 1;
+        else if(str1[i] < str2[i])
+            return -1;
+    }
+
+    return !strcmp(str1, MIN(str1, str2)) ? -1 : 1;
+}
+
+int inCharTab(string val, string* tab, int size, int getIdx){
+    if(size <= 0)
+        return -1;
 
     int left = 0, right = size - 1;
     int middle;
@@ -152,13 +193,13 @@ int inCharTab(string val, string* tab, int size){
     while (left <= right){
         middle = (right + left) / 2;
 
-        for (int i = 0; i < size; ++i)
-            printf("%s, ", tab[i]);
+//        for (int i = 0; i < size; ++i)
+//            printf("%s, ", tab[i]);
 
         if(!strcmp(tab[middle], val))
-            return 1;
+            return getIdx ? middle : 1;
 
-        if(strGreater(val, tab[middle]))
+        if(strGreater2(val, tab[middle]))
             left = middle + 1;
         else
             right = middle - 1;
@@ -167,49 +208,66 @@ int inCharTab(string val, string* tab, int size){
     return 0;
 }
 
-flexed getFlexedWords(FILE* f, string baseWord){
+toHash getFlexedWords(FILE* f, int mode){
     rewind(f);
 
-    flexed fl;
-    fl.tab = malloc(60 * sizeof(char **));
-    for (int i = 0; i < 60 ;++i)
-        fl.tab[i] = malloc(sizeof(char*));
+    toHash hash;
+    hash.keys = getColumnTab(f, 2, 1, mode);
+    hash.fl = malloc(hash.keys.size * sizeof(flexed));
+    for (int i = 0; i < hash.keys.size; ++i) {
+        hash.fl[i].flexedTab = malloc(sizeof(char *));
+        hash.fl[i].size = 1;
+    }
 
-    fl.size = 0;
+    sizedTab flexedWordsTab = getColumnTab(f, 1, 0, mode);
+    sizedTab rawBaseWordsTab = getColumnTab(f, 2, 0, mode);
+
     int bufferSize = 255;
     char* buff = malloc(bufferSize * sizeof(char));
-
     int nbCol = (int) getColumnCount(f);
-
     char** tab = malloc(nbCol * sizeof(char*));
-
     char* temp;
+    int lines = getLineCount(f);
+    int shouldBeStored = 0;
 
-    int line = getLineCount(f);
-
-    for (int i = 0; i < line; ++i){
+    for (int i = 0; i < lines; ++i) {
         fgets(buff, bufferSize, f);
-        //printf("%s %d\n", buff, strstr(buff, baseWord) != NULL);
-        if(strstr(buff, baseWord) != NULL){
-            temp = strndup(buff, strlen(buff) - 1);
 
-            for (int j = 0; j < nbCol; ++j)
-                tab[j] = strdup(strsep(&temp, "\t"));
+        shouldBeStored = 0;
 
-            if(tab[1][0] > baseWord[0]) break;
+        temp = strndup(buff, strlen(buff) - 1);
+        for (int j = 0; j < nbCol; ++j)
+            tab[j] = strdup(strsep(&temp, "\t"));
 
-            if(!strcmp(tab[1], baseWord)){
-                for (int j = 0; j < 3; ++j)
-                    fl.tab[fl.size][j] = strdup(tab[j]);
-                fl.size++;
+        if (mode == 0)
+            shouldBeStored = 1;
+        else if (mode == 1) {
+            if (tab[2][0] == 'V' && tab[2][1] == 'e' && tab[2][2] == 'r')
+                shouldBeStored = 1;
+        } else if (mode == 2) {
+            if (tab[2][0] == 'A' && tab[2][1] == 'd' && tab[2][2] == 'j')
+                shouldBeStored = 1;
+        } else if (mode == 3) {
+            if (tab[2][0] == 'N' && tab[2][1] == 'o' && tab[2][2] == 'm')
+                shouldBeStored = 1;
+        } else if (mode == 4) {
+            if (tab[2][0] == 'A' && tab[2][1] == 'd' && tab[2][2] == 'v')
+                shouldBeStored = 1;
+        }
+
+        if (shouldBeStored) {
+            int idx = inCharTab(tab[1], hash.keys.tab, hash.keys.size, 1);
+            //printf("%d %s\n", idx, tab[1]);
+            if(idx >= 0){
+                hash.fl[idx].flexedTab[hash.fl[idx].size - 1] = tab[1];
+                hash.fl[idx].flexedTab = realloc(hash.fl[idx].flexedTab, ++hash.fl[idx].size * sizeof(char *));
             }
         }
     }
 
     free(buff);
     //free(temp);
-    printf("%s\n", baseWord);
+//    printf("%s\n", baseWord);
     rewind(f);
-    return fl;
+    return hash;
 }
-

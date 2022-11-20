@@ -70,8 +70,8 @@ node* gotoLetterLeft(node* n, char letter){
 }
 
 
-void fillTreeDictionary(tree* dicoTree, FILE* f){
-    sizedTab baseFormTab = getBaseFormTab(f);
+void fillTreeDictionary(tree* dicoTree, FILE* f, int mode){
+    sizedTab baseFormTab = getBaseFormTab(f, mode);
     char* word;
     dicoTree->root = createNode('a');
     node* tempNode = dicoTree->root;
@@ -85,6 +85,69 @@ void fillTreeDictionary(tree* dicoTree, FILE* f){
             tempNode = addLetterLeft(tempNode, word[j]);
 
         tempNode->EOW = 1;
-        tempNode->flexedWords = getFlexedWords(f, word);
+//        tempNode->flexedWords = getFlexedWords(f, word);
     }
+}
+
+char* randomWord(tree Tree){
+    char* mot = malloc(25);
+    node* noeud = Tree.root;
+    int fin = 0;
+    int nbLettre = 0;
+
+    int chance = 20;
+
+    while (fin != 1){
+        int n = rand()%100 + 1;
+        if (n<=chance){
+            mot[nbLettre++] = noeud->letter;
+
+            if(n <= chance / 10 && noeud->EOW == 1)
+                fin = 1;
+            if (noeud->left == NULL)
+                fin = 1;
+            else
+                noeud = noeud->left;
+        }
+        else{
+            if(noeud->right == NULL && noeud->EOW == 1) {
+                fin = 1;
+                mot[nbLettre++] = noeud->letter;
+            }
+            if(noeud->right == NULL && noeud->EOW == 0) {
+                mot[nbLettre++] = noeud->letter;
+                noeud = noeud->left;
+            }
+            else
+                noeud = noeud->right;
+        }
+    }
+    mot[nbLettre]='\0';
+    return mot;
+}
+
+void n_a_v_n(tree nom, tree adjectif, tree verbe){
+    char* nom1 = randomWord(nom);
+    char* adj = randomWord(adjectif);
+    char* verb = randomWord(verbe);
+    char* nom2 = randomWord(nom);
+    printf("%s %s %s %s.\n",nom1,adj,verb,nom2);
+}
+
+void n_qui_v_v_n_a(tree nom, tree adjectif, tree verbe){
+    char* nom1 = randomWord(nom);
+    char* adj = randomWord(adjectif);
+    char* verbe1 = randomWord(verbe);
+    char* verbe2 = randomWord(verbe);
+    char* nom2 = randomWord(nom);
+    printf("%s, qui %s %s, %s %s.\n",nom1,verbe1,verbe2,nom2, adj);
+}
+
+void n_v_adj_n_adv(tree nom, tree adjectif, tree verbe, tree adverbe){
+    char* nom1 = randomWord(nom);
+    char* verbe1 = randomWord(verbe);
+    char* adj = randomWord(adjectif);
+    char* nom2 = randomWord(nom);
+    char* adv = randomWord(adverbe);
+    printf("%s %s %s %s %s.\n",nom1,verbe1,adv,nom2, adj);
 }

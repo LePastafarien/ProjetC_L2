@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <search.h>
 
 /**
  * \struct s_t
@@ -64,8 +65,8 @@ unsigned int getCount(FILE*, char, char);
  */
 #define getColumnCount(f) getCount(f, '\n', '\t')
 
-#define getBaseFormTab(f) getColumnTab(f, 2, 1)
-#define getFlexedFormTab(f) getColumnTab(f, 1, 0)
+#define getBaseFormTab(f, mode) getColumnTab(f, 2, 1, mode)
+#define getFlexedFormTab(f) getColumnTab(f, 1, 0, 0)
 
 /**
  * \fn sizedTab getColumnTab(FILE*, int, int);
@@ -76,7 +77,7 @@ unsigned int getCount(FILE*, char, char);
  * \param noDupes whether or not there should duplicates in the tab
  * \returns a tab of all the strings in the column
  */
-sizedTab getColumnTab(FILE*, int, int);
+sizedTab getColumnTab(FILE*, int, int, int);
 
 /**
  * \fn sizedTab getLineTab(FILE*, int);
@@ -97,7 +98,7 @@ sizedTab getLineTab(FILE*, int);
  * \warning \b tab needs to be sorted
  * \returns a boolean representing if a string is in the given array
  */
-int inCharTab(string, string*, int);
+int inCharTab(string, string*, int, int);
 
 /**
  * \fn int strGreater(const void*, const void*);
@@ -110,8 +111,14 @@ int inCharTab(string, string*, int);
 int strGreater(const void*, const void*);
 
 typedef struct {
-    char*** tab;
+    char** flexedTab;
     int size;
 } flexed;
-flexed getFlexedWords(FILE*, char*);
+
+typedef struct {
+    sizedTab keys;
+    flexed* fl;
+    int size;
+} toHash;
+toHash getFlexedWords(FILE*, int);
 #endif //PROJETC_2022_DICOPARSER_H
