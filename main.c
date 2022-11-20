@@ -13,7 +13,7 @@ int main() {
     /* Intializes random number generator */
     srand((unsigned) time(&t));
     FILE *f;
-    f = fopen("/home/jacques/CLionProjects/ProjetC_2022/dictionnaire.txt", "r");
+    f = fopen("/dictionnaire.txt", "r");
 
     tree nTree = createEmptyTree();
     tree adjTree = createEmptyTree();
