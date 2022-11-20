@@ -167,3 +167,46 @@ int inCharTab(string val, string* tab, int size){
     return 0;
 }
 
+flexed getFlexedWords(FILE* f, string baseWord){
+    rewind(f);
+
+    flexed fl;
+    fl.tab = malloc(sizeof(char **));
+    fl.size = 0;
+    int bufferSize = 255;
+    char* buff = malloc(bufferSize * sizeof(char));
+
+    int nbCol = (int) getColumnCount(f);
+
+    char** tab = malloc(nbCol * sizeof(char*));
+
+    char* temp;
+
+    int line = getLineCount(f);
+
+    for (int i = 0; i < line; ++i){
+        fgets(buff, bufferSize, f);
+        //printf("%s %d\n", buff, buff[0] > baseWord[0]);
+        if(strstr(buff, baseWord)){
+            //printf("dfsfsdfs\n");
+            temp = strndup(buff, strlen(buff) - 1);
+
+            for (int j = 0; j < nbCol; ++j)
+                tab[j] = strdup(strsep(&temp, "\t"));
+
+            if(tab[1][0] > baseWord[0])
+                break;
+
+            fl.tab[fl.size] = tab;
+            fl.size++;
+            fl.tab = realloc(fl.tab, fl.size * sizeof(char**));
+        }
+    }
+
+    free(buff);
+    //free(temp);
+
+    rewind(f);
+    return fl;
+}
+

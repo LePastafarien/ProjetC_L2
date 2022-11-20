@@ -44,7 +44,7 @@ typedef char* string;
 
 /**
  * \fn unsigned int getCount(FILE* f, char delimiter, char valToCount);
- * \brief counts occurrences of \a valtoCount in the \a f file, until it meats \a delimiter
+ * \brief counts occurrences of \a valtoCount in the \a f file, until it meets \a delimiter
  * \param f the file to search in
  * \param delimiter the char at witch the function should stop
  * \param valToCount the char we are trying to match
@@ -63,6 +63,9 @@ unsigned int getCount(FILE*, char, char);
  * \brief counts appearances of columns in the specified file
  */
 #define getColumnCount(f) getCount(f, '\n', '\t')
+
+#define getBaseFormTab(f) getColumnTab(f, 2, 1)
+#define getFlexedFormTab(f) getColumnTab(f, 1, 0)
 
 /**
  * \fn sizedTab getColumnTab(FILE*, int, int);
@@ -106,4 +109,9 @@ int inCharTab(string, string*, int);
  */
 int strGreater(const void*, const void*);
 
+typedef struct {
+    char*** tab;
+    int size;
+} flexed;
+flexed getFlexedWords(FILE*, char*);
 #endif //PROJETC_2022_DICOPARSER_H
