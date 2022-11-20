@@ -143,7 +143,7 @@ void n_qui_v_v_n_a(tree nom, tree adjectif, tree verbe){
     printf("%s, qui %s %s, %s %s.\n",nom1,verbe1,verbe2,nom2, adj);
 }
 
-void n_v_adj_n_adv(tree nom, tree adjectif, tree verbe, tree adverbe){
+void n_v_adv_n_adj(tree nom, tree adjectif, tree verbe, tree adverbe){
     char* nom1 = randomWord(nom);
     char* verbe1 = randomWord(verbe);
     char* adj = randomWord(adjectif);

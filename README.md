@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ProjetC_L2
 
 #### Pour lancer le programme il faut lancer/compiler le `main.c`
@@ -9,3 +10,6 @@ Nous ne savons pas s'il est possible de compiler le projet sur une machine non U
 ```
 
 Pour plus d'informations concernant les fonctions, une documentation a été rédigée à travers le code
+=======
+# ProjetC_L2
+>>>>>>> dico_parser
